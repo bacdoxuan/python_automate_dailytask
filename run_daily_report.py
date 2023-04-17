@@ -1,5 +1,7 @@
 import sqlite3
 import os
+import time
+import datetime
 
 # Database files
 db_3G_cell = "c:\\Bac.DX\\SQLite\\DataBase\\2023_3G Cell HS USER TP.db3"
@@ -76,8 +78,22 @@ def save_csv(query_result,file_name):
         fo.close()
 
 
+# a decorator to calculate time to run program
+def calculate_time(func):
+    def inner():
+        print("Program started at {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        start_time = time.time()
+        func()
+        end_time = time.time()
+        print("Program ended at {}".format(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        run_time = round(end_time - start_time, 2)
+        print("Run time: {} seconds".format(run_time))
+    return inner
+
+
 # main function, excecute sql with related database and save query result to a file, in database_sql_csv list.
-def main():
+@calculate_time
+def main() -> None:
     sql_folder = os.path.dirname(__file__)
     
     for item in database_sql_csv:
@@ -111,7 +127,7 @@ def main():
 
     # for line in query_result:
     #     print(line)
-    
+
 
 if __name__ == '__main__':
     main()
