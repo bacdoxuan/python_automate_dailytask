@@ -4,18 +4,20 @@ import time
 import datetime
 
 # Database files
-db_3G_cell = "c:\\Bac.DX\\SQLite\\DataBase\\2023_3G Cell HS USER TP.db3"
-db_3G_site = "c:\\Bac.DX\\SQLite\\DataBase\\2023_3G Site traffic Utilization.db3"
-db_4G_cell = "c:\\Bac.DX\\SQLite\\DataBase\\2023_4G Cell User Throughput.db3"
-db_4G_site = "c:\\Bac.DX\\SQLite\\DataBase\\2023_4G site traffic Utilization.db3"
+db_3G_cell = "c:\\Bac.DX\\SQLite\\DataBase\\2025_3G Cell HS USER TP.db3"
+db_3G_site = "c:\\Bac.DX\\SQLite\\DataBase\\2025_3G Site traffic Utilization.db3"
+db_4G_cell = "c:\\Bac.DX\\SQLite\\DataBase\\2025_4G Cell User Throughput.db3"
+db_4G_site = "c:\\Bac.DX\\SQLite\\DataBase\\2025_4G site traffic Utilization.db3"
 
 # Database - SQL - CSV
 # A list of tuples contains 3 factors: database - sql to excecute - csv file to save query result
 database_sql_csv = [
+    # 3G cell
     (db_3G_cell, "3G_User_TP_Nation.sql", "3G_User_TP_Nation.csv"),
     (db_3G_cell, "3G_User_TP_Zone.sql", "3G_User_TP_Zone.csv"),
     (db_3G_cell, "3G_CS_Traffic.sql", "3G_CS_Traffic.csv"),
     (db_3G_cell, "3G_Traffic_By_Layer.sql", "3G_Traffic_By_Layer.csv"),
+    # 3G Site
     (db_3G_site, "3G_Utilization_Province.sql", "3G_Utilization_Province.csv"),
     (db_3G_site, "3G_Utilization_Region.sql", "3G_Utilization_Region.csv"),
     (db_3G_site, "3G_Utilization_Zone.sql", "3G_Utilization_Zone.csv"),
@@ -23,9 +25,11 @@ database_sql_csv = [
     (db_3G_site, "3G_Traffic_Cap.sql", "3G_Traffic_Cap.csv"),
     (db_3G_site, "3G_Traffic_Compare.sql", "3G_Traffic_Compare.csv"),
     (db_3G_site, "3G_Check_No_Carrier.sql", "3G_Check_No_Carrier.csv"),
+    # 4G Cell
     (db_4G_cell, "4G_Traffic_By_Layer.sql", "4G_Traffic_By_Layer.csv"),
     (db_4G_cell, "4G_User_TP_Nation.sql", "4G_User_TP_Nation.csv"),
     (db_4G_cell, "4G_User_TP_Zone.sql", "4G_User_TP_Zone.csv"),
+    # 4G Site
     (db_4G_site, "4G_Utilization_Nation.sql", "4G_Utilization_Nation.csv"),
     (db_4G_site, "4G_Utilization_Province.sql", "4G_Utilization_Province.csv"),
     (db_4G_site, "4G_Utilization_Region.sql", "4G_Utilization_Region.csv"),
@@ -33,6 +37,20 @@ database_sql_csv = [
     (db_4G_site, "4G_Traffic_Compare.sql", "4G_Traffic_Compare.csv"),
     (db_4G_site, "4G_Traffic_Cap.sql", "4G_Traffic_Cap.csv"),
     (db_4G_site, "4G_Check_No_Carrier.sql", "4G_Check_No_Carrier.csv"),
+    # add more information about physical site by frequency layers - Province and Zone level
+    (db_3G_cell, "3G_Physical_Site_by_Province.sql", "3G_Physical_Site_by_Province.csv"),
+    (db_3G_cell, "3G_Physical_Site_by_Zone.sql", "3G_Physical_Site_by_Zone.csv"),
+    (db_4G_cell, "4G_Physical_Site_by_Province.sql", "4G_Physical_Site_by_Province.csv"),
+    (db_4G_cell, "4G_Physical_Site_by_Zone.sql", "4G_Physical_Site_by_Zone.csv"),
+    # add more information about 3G and 4G carrier configuration
+    (db_3G_cell, "3G_carrier_config.sql", "3G_carrier_config.csv"),
+    (db_4G_cell, "4G_carrier_config.sql", "4G_carrier_config.csv"),
+    # 3G and 4G site configuration
+    (db_3G_cell, "3G_Site_config.sql", "3G_Site_config.csv"),
+    (db_4G_cell, "4G_Site_config.sql", "4G_Site_config.csv"),
+    # 3G and 4G User and Throughput by Province
+    (db_3G_cell, "3G_User_TP_Province.sql", "3G_User_TP_Province.csv"),
+    (db_4G_cell, "4G_User_TP_Province.sql", "4G_User_TP_Province.csv"),
 ]
 
 
@@ -96,7 +114,6 @@ def calculate_time(func):
         )
         run_time = round(end_time - start_time, 2)
         print("Run time: {} seconds".format(run_time))
-
     return inner
 
 
