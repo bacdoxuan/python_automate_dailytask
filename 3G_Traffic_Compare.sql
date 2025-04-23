@@ -9,3 +9,4 @@ Where
 [Date] = date('now','-1 day') or [Date] = date('now','-2 day') or [Date] = date('now','-8 day')
 group by Province, [Date])
 group by Province
+order by Zone
